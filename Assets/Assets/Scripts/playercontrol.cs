@@ -41,7 +41,7 @@ public class playercontrol : MonoBehaviour {
 
         //pink orb
 
-        if (currentcolor == colorlist[0] && col.gameObject.name.Contains(/*"pinkplatform"*/"orangeplatform")) //if orb is pink and hits pink platform
+        if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform")) //if orb is pink and hits pink platform
         {
             Debug.Log("pink on pink");
             score++;
@@ -62,7 +62,7 @@ public class playercontrol : MonoBehaviour {
 
         //orange orb
 
-        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("orangeplatform"))  //if orb is orange and hits orange platform
+        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("pinkplatform"))  //if orb is orange and hits orange platform
         {
             Debug.Log("orange on orange");
             score++;
