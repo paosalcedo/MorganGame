@@ -44,33 +44,12 @@ public class playercontrol : MonoBehaviour {
         if (currentcolor == colorlist[0] && col.gameObject.name.Contains(/*"pinkplatform"*/"orangeplatform")) //if orb is pink and hits pink platform
         {
             Debug.Log("pink on pink");
-            score ++;
-            Debug.Log("score: " +score);
+            score++;
+            Debug.Log("score: " + score);
             GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
         }
 
-        else if (currentcolor == colorlist[0] && col.gameObject.name.Contains("greenplatform"))
-        {
-            Debug.Log("pink on green");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[0] && col.gameObject.name.Contains("blueplatform"))
-        {
-            Debug.Log("pink on blue");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        //else if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform"))
-		else if (currentcolor == colorlist[0] && col.gameObject.name.Contains("pinkplatform"))
-		{
-            Debug.Log("pink on orange");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
+   
         //green orb
 
         else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("greenplatform"))  //if orb is green and hits green platform
@@ -81,30 +60,9 @@ public class playercontrol : MonoBehaviour {
             GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
         }
 
-        else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("pinkplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("green on pink");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("orangeplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("green on orange");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("blueplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("green on blue");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
         //orange orb
 
-        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("orangeplatform"))  //if orb is green and hits green platform
+        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("orangeplatform"))  //if orb is orange and hits orange platform
         {
             Debug.Log("orange on orange");
             score++;
@@ -112,30 +70,9 @@ public class playercontrol : MonoBehaviour {
             GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
         }
 
-        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("pinkplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("orange on pink");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("greenplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("orange on green");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("blueplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("orange on blue");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
         //blue orb
 
-        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("blueplatform"))  //if orb is green and hits green platform
+        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("blueplatform"))  //if orb is blue and hits blue platform
         {
             Debug.Log("blue on blue");
             score++;
@@ -143,21 +80,7 @@ public class playercontrol : MonoBehaviour {
             GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
         }
 
-        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("pinkplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("blue on pink");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("greenplatform"))  //if orb is green and hits green platform
-        {
-            Debug.Log("blue on green");
-            score -= 1;
-            Debug.Log("score: " + score);
-        }
-
-        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("orangeplatform"))  //if orb is green and hits green platform
+        else
         {
             Debug.Log("blue on orange");
             score -= 1;

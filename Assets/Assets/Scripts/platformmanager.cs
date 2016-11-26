@@ -55,7 +55,9 @@ public class platformmanager : MonoBehaviour
                  rightspawnPosition.y,
                  rightspawnPosition.z);
 
-                 pinkplatform.GetComponent<SpriteRenderer>().flipX = true;
+                pinkplatform.GetComponent<SpriteRenderer>().flipX = true;
+                //transform.Rotate(new Vector3(0, 180, 0));
+
             }
         }
 
