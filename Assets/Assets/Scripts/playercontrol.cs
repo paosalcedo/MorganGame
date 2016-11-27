@@ -39,25 +39,30 @@ public class playercontrol : MonoBehaviour {
         if (Input.GetAxis("Horizontal") > 0)
         {
             //set the velocity of the rigid body
-            rb.velocity = new Vector2(moveSpeed * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
             //set the velocity of the rigid body
-            rb.velocity = new Vector2(-moveSpeed * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
         }
         if (Input.GetAxis("Vertical") > 0)
         {
             //set the velocity of the rigid body
-            rb.velocity = new Vector2(rb.velocity.x, moveSpeed * moveSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
         }
         if (Input.GetAxis("Vertical") < 0)
         {
             //set the velocity of the rigid body
-            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed * moveSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
         }
 
-        transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
+        var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+		//Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+
+		//transform.position += move * moveSpeed * Time.deltaTime;
+
+        //transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
 
         scoreText.text = score.ToString();
 
