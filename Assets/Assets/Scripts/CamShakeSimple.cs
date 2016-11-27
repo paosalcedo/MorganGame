@@ -18,11 +18,12 @@ public class CamShakeSimple : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
 
-        shakeAmt = coll.relativeVelocity.magnitude * .025f;
-        InvokeRepeating("CameraShake", 0, .01f);
+        //shakeAmt = coll.relativeVelocity.magnitude * .025f;
+		shakeAmt = coll.relativeVelocity.magnitude * .005f;
+		InvokeRepeating("CameraShake", 0, .01f);
         Invoke("StopShaking", 0.3f);
 
-        if (Input.GetAxis("Horizontal") > 0)
+       /* if (Input.GetAxis("Horizontal") > 0)
         {
             //set the velocity of the rigid body
             rb.velocity = new Vector2(moveSpeed * speedMultiplier, rb.velocity.y);
@@ -41,7 +42,7 @@ public class CamShakeSimple : MonoBehaviour
         {
             //set the velocity of the rigid body
             rb.velocity = new Vector2(rb.velocity.x, -moveSpeed * speedMultiplier);
-        }
+        }*/
 
     }
 

@@ -57,7 +57,27 @@ public class playercontrol : MonoBehaviour {
             rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
         }
 
-        var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+		//resetting player position when going past borders
+		if (rb.transform.position.x > 3f) 
+		{
+			rb.transform.position = new Vector3 (-2.99f, rb.transform.position.y, rb.transform.position.z);
+		}
+		else if (rb.transform.position.x < -3f) 
+		{
+			rb.transform.position = new Vector3 (2.99f, rb.transform.position.y, rb.transform.position.z);
+		}
+
+		if (rb.transform.position.y > 2.81f)
+		{
+			rb.transform.position = new Vector3 (rb.transform.position.x, -7.70f, rb.transform.position.z);
+		}
+		else if (rb.transform.position.y < -7.71f)
+		{
+			rb.transform.position = new Vector3 (rb.transform.position.x, 2.80f, rb.transform.position.z);
+		}	
+			
+
+        //var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 		//Rigidbody2D rb = GetComponent<Rigidbody2D> ();
 
 		//transform.position += move * moveSpeed * Time.deltaTime;
