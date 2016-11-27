@@ -11,6 +11,8 @@ public class playercontrol : MonoBehaviour {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
+    private int check;
+
     // Use this for initialization
 
 
@@ -80,16 +82,28 @@ public class playercontrol : MonoBehaviour {
             Debug.Log("pink on pink");
             score++;
             Debug.Log("score: " + score);
-            GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
-		
-       		//green orb
-		}
+            while (check == 0)
+            {
+                check = Random.Range(0, 3);
+            }
+                GetComponent<SpriteRenderer>().color = colorlist[check];
+           
+
+            //green orb
+        }
         	else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("greenplatform"))  //if orb is green and hits green platform
 	        {
 	            Debug.Log("green on green");
 	            score++;
 	            Debug.Log("score: " + score);
-	            GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
+
+            while (check == 1)
+            {
+                check = Random.Range(0, 3);
+            }
+                GetComponent<SpriteRenderer>().color = colorlist[check];
+            
+
 	        }
 
 	        //orange orb
@@ -99,8 +113,13 @@ public class playercontrol : MonoBehaviour {
 	            Debug.Log("orange on orange");
 	            score++;
 	            Debug.Log("score: " + score);
-	            GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
-	        }
+            while (check == 2)
+            {
+                check = Random.Range(0, 3);
+            }
+            GetComponent<SpriteRenderer>().color = colorlist[check];
+            
+        }
 
 	        //blue orb
 
@@ -109,8 +128,12 @@ public class playercontrol : MonoBehaviour {
 	            Debug.Log("blue on blue");
 	            score++;
 	            Debug.Log("score: " + score);
-	            GetComponent<SpriteRenderer>().color = colorlist[Random.Range(0, 3)];
-	        }
+            while (check == 3)
+            {
+                check = Random.Range(0, 3);
+            }
+            GetComponent<SpriteRenderer>().color = colorlist[check];
+        }
 
 	        else
 	        {
