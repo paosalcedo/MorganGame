@@ -4,7 +4,7 @@ using System.Collections;
 public class CamShakeSimple : MonoBehaviour
 {
 
-    Vector3 originalCameraPosition;
+    public Vector3 originalCameraPosition;
 
     float shakeAmt = 0;
 
@@ -16,6 +16,8 @@ public class CamShakeSimple : MonoBehaviour
         shakeAmt = coll.relativeVelocity.magnitude * .025f;
         InvokeRepeating("CameraShake", 0, .01f);
         Invoke("StopShaking", 0.3f);
+
+        
 
     }
 
@@ -33,7 +35,7 @@ public class CamShakeSimple : MonoBehaviour
     void StopShaking()
     {
         CancelInvoke("CameraShake");
-        
+        mainCamera.transform.position = originalCameraPosition;
     }
 
 }
