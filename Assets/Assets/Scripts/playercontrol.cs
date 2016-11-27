@@ -28,6 +28,8 @@ public class playercontrol : MonoBehaviour {
         var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         transform.position += move * moveSpeed * Time.deltaTime;
 
+        transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
+
         scoreText.text = score.ToString();
 
 		Color currentcolor = GetComponent<SpriteRenderer>().color;
