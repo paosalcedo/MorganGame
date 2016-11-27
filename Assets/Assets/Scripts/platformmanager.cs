@@ -19,6 +19,7 @@ public class platformmanager : MonoBehaviour
 
 
     public float speed;
+    public float spawnerSpeedUp;
     private float speedGain;
 
    
@@ -161,8 +162,8 @@ public class platformmanager : MonoBehaviour
 
     public void Update()
     {
-        speedGain = speed * (Time.deltaTime);
-
+        speedGain = speedGain + (speed*Time.deltaTime);
+        timeBetweenSpawns = timeBetweenSpawns - (spawnerSpeedUp*Time.deltaTime);
         
 
 
