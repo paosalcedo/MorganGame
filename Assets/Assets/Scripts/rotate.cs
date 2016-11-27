@@ -11,7 +11,9 @@ public class rotate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-       // transform.Rotate(new Vector3(0, 50 * Time.deltaTime, 0));
+       transform.Rotate(new Vector3(0, 50 * Time.deltaTime, 0));
+
+        //Physics2D.gravity.y(Time.deltaTime * 10);
 
         
     }

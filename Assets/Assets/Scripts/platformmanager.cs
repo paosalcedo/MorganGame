@@ -18,6 +18,11 @@ public class platformmanager : MonoBehaviour
     //public float ySpawnPosMax;
 
 
+    public float speed;
+    private float speedGain;
+
+   
+
 
 
     void SpawnPlatform()
@@ -45,6 +50,8 @@ public class platformmanager : MonoBehaviour
                  spawnPosition.y,
                  spawnPosition.z);
 
+                pinkplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
+
             }
 
             else //spawn on right
@@ -58,6 +65,8 @@ public class platformmanager : MonoBehaviour
                 pinkplatform.GetComponent<SpriteRenderer>().flipX = true;
                 //transform.Rotate(new Vector3(0, 180, 0));
 
+                pinkplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
+
             }
         }
 
@@ -70,6 +79,8 @@ public class platformmanager : MonoBehaviour
                 spawnPosition.x,
                 spawnPosition.y,
                 spawnPosition.z);
+
+                blueplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
 
             else
@@ -81,6 +92,8 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.z);
 
                 blueplatform.GetComponent<SpriteRenderer>().flipX = true;
+
+                blueplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
             
         }
@@ -95,6 +108,8 @@ public class platformmanager : MonoBehaviour
                spawnPosition.x,
                spawnPosition.y,
                spawnPosition.z);
+
+               orangeplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             } 
 
             else
@@ -106,6 +121,8 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.z);
 
                 orangeplatform.GetComponent<SpriteRenderer>().flipX = true;
+
+                orangeplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
         }
 
@@ -118,6 +135,8 @@ public class platformmanager : MonoBehaviour
                spawnPosition.x,
                spawnPosition.y,
                spawnPosition.z);
+
+                greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
 
             else
@@ -129,6 +148,8 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.z);
 
                 greenplatform.GetComponent<SpriteRenderer>().flipX = true;
+
+                greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
         }
 
@@ -140,6 +161,11 @@ public class platformmanager : MonoBehaviour
 
     public void Update()
     {
+        speedGain = speed * (Time.deltaTime);
+
+        
+
+
         //Time.delaTime is how much time has occured since the last update. 
         //We subtract it from time until spawn every frame
         timeUntilSpawn -= Time.deltaTime;
