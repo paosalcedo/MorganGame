@@ -33,8 +33,29 @@ public class playercontrol : MonoBehaviour {
 	void Update () 
 		{
 
-        var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.position += move * moveSpeed * Time.deltaTime;
+        // var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        // transform.position += move * moveSpeed * Time.deltaTime;
+
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            //set the velocity of the rigid body
+            rb.velocity = new Vector2(moveSpeed * moveSpeed, rb.velocity.y);
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            //set the velocity of the rigid body
+            rb.velocity = new Vector2(-moveSpeed * moveSpeed, rb.velocity.y);
+        }
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            //set the velocity of the rigid body
+            rb.velocity = new Vector2(rb.velocity.x, moveSpeed * moveSpeed);
+        }
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            //set the velocity of the rigid body
+            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed * moveSpeed);
+        }
 
         transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
 
