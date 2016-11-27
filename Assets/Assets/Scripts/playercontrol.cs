@@ -13,8 +13,9 @@ public class playercontrol : MonoBehaviour {
 
     private int check;
 
-  
+    public GameObject gb;
 
+   
 
     // Use this for initialization
 
