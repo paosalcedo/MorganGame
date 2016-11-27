@@ -13,6 +13,9 @@ public class playercontrol : MonoBehaviour {
 
     private int check;
 
+  
+
+
     // Use this for initialization
 
 
@@ -78,6 +81,8 @@ public class playercontrol : MonoBehaviour {
         //}
 
         //pink orb
+
+     
 
         if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform")) //if orb is pink and hits pink platform
         {
