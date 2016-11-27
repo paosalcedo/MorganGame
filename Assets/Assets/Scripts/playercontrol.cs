@@ -15,14 +15,18 @@ public class playercontrol : MonoBehaviour {
 
     public GameObject gb;
 
-   
+    private AudioSource source;
+
+
 
     // Use this for initialization
 
 
-	void Start () {
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        source = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -83,7 +87,9 @@ public class playercontrol : MonoBehaviour {
 
         //pink orb
 
-     
+        source.Play();
+
+
 
         if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform")) //if orb is pink and hits pink platform
         {
