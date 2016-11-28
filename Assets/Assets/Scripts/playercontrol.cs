@@ -17,10 +17,16 @@ public class playercontrol : MonoBehaviour {
 
 	private AudioSource source;
 
-	public float leftConstraint;
-	public float rightConstraint;
-	public float topConstraint;
-	public float bottomConstraint;
+	public float playerMovingWidth;
+	public float playerMovingHeight;
+	public float playerWidth;
+	public float playerHeight;
+
+
+	private float leftConstraint;
+	private float rightConstraint;
+	private float topConstraint;
+	private float bottomConstraint;
 
 
 
@@ -51,16 +57,16 @@ public class playercontrol : MonoBehaviour {
 		if (Input.GetAxis ("Horizontal") > 0) {
 			//set the velocity of the rigid body
 			rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
-			rb.transform.localScale = new Vector2 (5.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y); 
 		} else {
-			rb.transform.localScale = new Vector2 (3.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		}
 
         if (Input.GetAxis("Horizontal") < 0)
         {
             //set the velocity of the rigid body
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-			rb.transform.localScale = new Vector2 (5.5f, rb.transform.localScale.y);
+			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y);
 
         } /*else {
 			rb.transform.localScale = new Vector2 (1.0f, rb.transform.localScale.y); 
@@ -70,40 +76,40 @@ public class playercontrol : MonoBehaviour {
         {
             //set the velocity of the rigid body
 			rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 5.5f); 
+			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
 		} else {
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 3.5f); 
+			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerHeight); 
 		}
 
         if (Input.GetAxis("Vertical") < 0)
         {
             //set the velocity of the rigid body
 			rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 5.5f); 
+			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
 		} /*else {
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 1.0f); 
 		}*/
 
 		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
-			rb.transform.localScale = new Vector2 (3.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		} else {
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);		
 		} 
 
 		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) {
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
-			rb.transform.localScale = new Vector2 (3.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		}  
 
 		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) {
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
-			rb.transform.localScale = new Vector2 (3.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		} 
 
 		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) {
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
-			rb.transform.localScale = new Vector2 (3.5f, rb.transform.localScale.y); 
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		}  
 
 
@@ -152,7 +158,7 @@ public class playercontrol : MonoBehaviour {
 
         //transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
 
-        scoreText.text = score.ToString();
+        scoreText.text = "Score: " + score.ToString();
 
 		Color currentcolor = GetComponent<SpriteRenderer>().color;
 
@@ -195,6 +201,8 @@ public class playercontrol : MonoBehaviour {
         Debug.Log("now: " + currentcolor);
 
         Destroy(col.gameObject.GetComponent<CircleCollider2D>()); //can't collide with object twice
+	
+		
 
         //if (col.collider.tag == "bonus")
         //{
@@ -202,7 +210,7 @@ public class playercontrol : MonoBehaviour {
         //}
 
         //pink orb
-
+	
 
         if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform")) //if orb is pink and hits pink platform
         {
