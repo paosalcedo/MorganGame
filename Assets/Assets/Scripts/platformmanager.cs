@@ -137,7 +137,7 @@ public class platformmanager : MonoBehaviour
                spawnPosition.y,
                spawnPosition.z);
 
-                greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
+               greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
 
             else
@@ -148,9 +148,9 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.y,
                 rightspawnPosition.z);
 
-                greenplatform.GetComponent<SpriteRenderer>().flipX = true;
+               greenplatform.GetComponent<SpriteRenderer>().flipX = true;
 
-                greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
+               greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
         }
 
