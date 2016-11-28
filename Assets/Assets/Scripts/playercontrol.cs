@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
 
@@ -7,6 +8,7 @@ public class playercontrol : MonoBehaviour {
     public Color[] colorlist;
     public int score;
     public TextMesh scoreText;
+	public Text UIscoreText;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -159,6 +161,8 @@ public class playercontrol : MonoBehaviour {
         //transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
 
         scoreText.text = "Score: " + score.ToString();
+		UIscoreText.text = "Score: " + score.ToString ();
+
 
 		Color currentcolor = GetComponent<SpriteRenderer>().color;
 
