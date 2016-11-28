@@ -10,6 +10,7 @@ public class PlayerHealthManager : MonoBehaviour
 	// Use this for initialization
 	public int playerHealth;
 	public Text healthText;
+    public TextMesh textOutput;
 
 	void Start()
 	{
@@ -20,11 +21,14 @@ public class PlayerHealthManager : MonoBehaviour
 	{
 		if(playerHealth <= 0)
 		{
-			SceneManager.LoadScene ("main game");
+            Destroy(gameObject.GetComponent<SpriteRenderer>());
+            Invoke("Restart", 1f);
 		}
 
-		healthText.text = "Health: " + playerHealth.ToString ("#"); 
+		healthText.text = "Health: " + playerHealth.ToString ("#");
 
+
+        textOutput.text = healthText.text;
 
 	}
 
@@ -36,4 +40,9 @@ public class PlayerHealthManager : MonoBehaviour
 			Debug.Log ("Collision with meteor!");
 		}
 	}
+
+    void Restart()
+    {
+        SceneManager.LoadScene("main game");
+    }
 }
