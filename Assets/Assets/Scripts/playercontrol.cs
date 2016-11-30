@@ -53,6 +53,11 @@ public class playercontrol : MonoBehaviour {
 	void Update () 
 		{
 
+		if (score < 0) 
+		{
+			score = 0;
+		} 
+
         // var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         // transform.position += move * moveSpeed * Time.deltaTime;
 
@@ -173,7 +178,6 @@ public class playercontrol : MonoBehaviour {
 			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = true;
-			Debug.Log ("Trail is now Orange!");
 		}
 
 		else if (currentcolor == colorlist [1]) {
@@ -181,19 +185,16 @@ public class playercontrol : MonoBehaviour {
 			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = true;
-			Debug.Log ("Trail is now Green!");
 		} else if (currentcolor == colorlist [2]) {
 			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = true;
-			Debug.Log ("Trail is now Pink!");
 		} else if (currentcolor == colorlist [3]) {
 			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = true;
-			Debug.Log ("Trail is now Blue!");
     	}
 		
 		}
@@ -206,8 +207,6 @@ public class playercontrol : MonoBehaviour {
 
         Destroy(col.gameObject.GetComponent<CircleCollider2D>()); //can't collide with object twice
 	
-		
-
         //if (col.collider.tag == "bonus")
         //{
         //    score++;
@@ -216,7 +215,7 @@ public class playercontrol : MonoBehaviour {
         //pink orb
 	
 
-        if (currentcolor == colorlist[0] && col.gameObject.name.Contains("orangeplatform")) //if orb is pink and hits pink platform
+		if (currentcolor == colorlist[0] && col.gameObject.tag == "Magenta"/*col.gameObject.name.Contains("orangeplatform")*/) //if orb is pink and hits pink platform
         {
 			GameObject success = GameObject.Find ("SuccessSound"); 
 			success.SendMessage ("RightColorSound"); //plays successful sound when in contact with correct color
@@ -232,7 +231,7 @@ public class playercontrol : MonoBehaviour {
 
             //green orb
         }
-        	else if (currentcolor == colorlist[1] && col.gameObject.name.Contains("greenplatform"))  //if orb is green and hits green platform
+		else if (currentcolor == colorlist[1] && col.gameObject.tag == "Green" /*col.gameObject.name.Contains("greenplatform")*/)  //if orb is green and hits green platform
 	        {
 				GameObject success = GameObject.Find ("SuccessSound");
 				success.SendMessage ("RightColorSound");
@@ -251,11 +250,11 @@ public class playercontrol : MonoBehaviour {
 
 	        //orange orb
 
-	        else if (currentcolor == colorlist[2] && col.gameObject.name.Contains("pinkplatform"))  //if orb is orange and hits orange platform //pink should work now
+		else if (currentcolor == colorlist[2] && col.gameObject.tag == "Yellow"/*col.gameObject.name.Contains("pinkplatform")*/)  //if orb is orange and hits orange platform //pink should work now
 	        {
 				GameObject success = GameObject.Find ("SuccessSound");
 				success.SendMessage ("RightColorSound");
-				Debug.Log("orange on orange");
+				//Debug.Log("orange on orange");
 	            score++;
 	            Debug.Log("score: " + score);
             while (check == 2)
@@ -268,7 +267,7 @@ public class playercontrol : MonoBehaviour {
 
 	        //blue orb
 
-	        else if (currentcolor == colorlist[3] && col.gameObject.name.Contains("blueplatform"))  //if orb is blue and hits blue platform 
+		else if (currentcolor == colorlist[3] && col.gameObject.tag == "Yellow" /*col.gameObject.name.Contains("blueplatform")*/)  //if orb is blue and hits blue platform 
 	        {
 				GameObject success = GameObject.Find ("SuccessSound");
 				success.SendMessage ("RightColorSound");
