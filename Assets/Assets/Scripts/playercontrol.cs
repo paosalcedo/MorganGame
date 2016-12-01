@@ -391,7 +391,7 @@ public class playercontrol : MonoBehaviour {
 
     void PartFlash()
     {
-        part.startSize = 1;
+        part.startSize = 10;
     }
 
     void PartUnFlash()
