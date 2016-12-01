@@ -25,10 +25,10 @@ public class PlayerHealthManager : MonoBehaviour
             Invoke("Restart", 1f);
 		}
 
-		healthText.text = "Health: " + playerHealth.ToString ("#");
+		//healthText.text = "Health: " + playerHealth.ToString ("#");
 
 
-        textOutput.text = healthText.text;
+       // textOutput.text = healthText.text;
 
 	}
 

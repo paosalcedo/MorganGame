@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
@@ -35,6 +36,9 @@ public class playercontrol : MonoBehaviour {
 	private float rightConstraint;
 	private float topConstraint;
 	private float bottomConstraint;
+
+    public float PlayerHealth = 100;
+    public Text healthText;
 
 
 
@@ -265,6 +269,17 @@ public class playercontrol : MonoBehaviour {
 			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = false;
 			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = true;
     	}
+
+        if(PlayerHealth <= 0)
+		{
+            Destroy(gameObject.GetComponent<SpriteRenderer>());
+            Invoke("Restart", 2f);
+		}
+
+		healthText.text = "Health: " + PlayerHealth.ToString ("#");
+
+
+        
 		
 		}
 
@@ -352,8 +367,8 @@ public class playercontrol : MonoBehaviour {
 
 	        else
 	        {
-	            Debug.Log("blue on orange");
-	            score -= 1;
+	            Debug.Log("hit");
+                PlayerHealth-=10;
 	            Debug.Log("score: " + score);
 				source.Play();
 	            col.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
@@ -361,5 +376,9 @@ public class playercontrol : MonoBehaviour {
         	}
 			
 	}
+    void Restart()
+    {
+        SceneManager.LoadScene("main game");
+    }
 
 }
