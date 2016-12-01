@@ -4,7 +4,13 @@ using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
 
-    public float moveSpeed = 2;
+	public float dashFuel;
+    public float moveSpeed;
+	public float maxDash;
+	public float minDash;
+	public float baseMaxDash;
+	public float dashBoost;
+	//private float baseMoveSpeed = 6.0f;
     public Color[] colorlist;
     public int score;
     public TextMesh scoreText;
@@ -47,6 +53,7 @@ public class playercontrol : MonoBehaviour {
 		topConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, Screen.height) ).y;
 		bottomConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).y;
 
+		dashFuel = 50f;
     }
 	
 	// Update is called once per frame
@@ -63,7 +70,8 @@ public class playercontrol : MonoBehaviour {
 
 		if (Input.GetAxis ("Horizontal") > 0) {
 			//set the velocity of the rigid body
-			rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
+			rb.velocity = new Vector2 (moveSpeed + dashBoost, rb.velocity.y);
+			//rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
 			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y); 
 		} else {
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
@@ -72,7 +80,8 @@ public class playercontrol : MonoBehaviour {
         if (Input.GetAxis("Horizontal") < 0)
         {
             //set the velocity of the rigid body
-            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            //rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			rb.velocity = new Vector2(-moveSpeed - dashBoost, rb.velocity.y);
 			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y);
 
         } /*else {
@@ -82,7 +91,8 @@ public class playercontrol : MonoBehaviour {
         if (Input.GetAxis("Vertical") > 0)
         {
             //set the velocity of the rigid body
-			rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+			rb.velocity = new Vector2(rb.velocity.x, moveSpeed + dashBoost);
+			//rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
 		} else {
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerHeight); 
@@ -91,34 +101,93 @@ public class playercontrol : MonoBehaviour {
         if (Input.GetAxis("Vertical") < 0)
         {
             //set the velocity of the rigid body
-			rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+			rb.velocity = new Vector2(rb.velocity.x, -moveSpeed - dashBoost);
+			//rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
 		} /*else {
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 1.0f); 
 		}*/
 
-		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
+		//changes angle of the sprite depending on which directional keys are being pressed
+		/*if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
+			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		} else {
+			maxDash = baseMaxDash;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);		
 		} 
 
 		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) {
+			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
+		} else {
+			maxDash = baseMaxDash;
 		}  
 
 		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) {
+			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		} 
 
 		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) {
+			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
+		}*/  
+
+		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
+		} 
+		else if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) 
+		{
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
 		}  
 
+		else if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) {
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
+		} 
+
+		else if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) 
+		{
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
+			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
+		} 
+		else 
+		{
+			maxDash = baseMaxDash;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);		
+		} 
+
+
+		//DASH ATTEMPT
+		//float dashCounter = 0;
+
+		if (/*Input.GetKey ("left shift") ||*/ Input.GetKey (KeyCode.Space) && dashFuel > 10f) {
+			dashBoost += 1.0f;
+			dashFuel -= 100f * Time.deltaTime;
+			//dashCounter += Time.deltaTime;
+		} else
+		{
+			dashBoost = minDash;
+			dashFuel += 10f;
+			//dashCounter = 0f;
+		}
+
+		dashFuel = Mathf.Clamp (dashFuel, 0f, 50f);
+
+	
+
+		//Mathf.Clamp(dashBoost, 
 
 		//resetting player position when going past borders
 		/*if (rb.transform.position.x > 3f) 
