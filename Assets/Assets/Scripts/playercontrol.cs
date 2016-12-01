@@ -39,6 +39,7 @@ public class playercontrol : MonoBehaviour {
 
     public float PlayerHealth = 100;
     public Text healthText;
+    public ParticleSystem part;
 
 
 
@@ -58,6 +59,8 @@ public class playercontrol : MonoBehaviour {
 		bottomConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).y;
 
 		dashFuel = 50f;
+
+        PartUnFlash();
     }
 	
 	// Update is called once per frame
@@ -279,7 +282,7 @@ public class playercontrol : MonoBehaviour {
 		healthText.text = "Health: " + PlayerHealth.ToString ("#");
 
 
-        
+       part.startColor = currentcolor;
 		
 		}
 
@@ -290,14 +293,18 @@ public class playercontrol : MonoBehaviour {
         Debug.Log("now: " + currentcolor);
 
         Destroy(col.gameObject.GetComponent<CircleCollider2D>()); //can't collide with object twice
-	
+
         //if (col.collider.tag == "bonus")
         //{
         //    score++;
         //}
 
         //pink orb
-	
+
+        PartFlash();
+        Invoke("PartUnFlash", 0.5f);
+
+       
 
 		if (currentcolor == colorlist[0] && col.gameObject.tag == "Magenta"/*col.gameObject.name.Contains("orangeplatform")*/) //if orb is pink and hits pink platform
         {
@@ -381,4 +388,14 @@ public class playercontrol : MonoBehaviour {
         SceneManager.LoadScene("main game");
     }
 
+
+    void PartFlash()
+    {
+        part.startSize = 1;
+    }
+
+    void PartUnFlash()
+    {
+        part.startSize = 0;
+    }
 }
