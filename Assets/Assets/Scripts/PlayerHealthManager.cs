@@ -45,4 +45,10 @@ public class PlayerHealthManager : MonoBehaviour
     {
         SceneManager.LoadScene("main game");
     }
+
+	void HitByMeteor()
+	{
+		playerHealth -= 1;
+	}
 }
+
