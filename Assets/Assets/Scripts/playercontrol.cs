@@ -79,34 +79,37 @@ public class playercontrol : MonoBehaviour {
 
         PartUnFlash();
     }
-	
-	// Update is called once per frame
-	void Update () 
-		{
 
-		if (score < 0) 
-		{
-			score = 0;
-		} 
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (score < 0)
+        {
+            score = 0;
+        }
 
         // var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         // transform.position += move * moveSpeed * Time.deltaTime;
 
-		if (Input.GetAxis ("Horizontal") > 0) {
-			//set the velocity of the rigid body
-			rb.velocity = new Vector2 (moveSpeed + dashBoost, rb.velocity.y);
-			//rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
-			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y); 
-		} else {
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		}
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            //set the velocity of the rigid body
+            rb.velocity = new Vector2(moveSpeed + dashBoost, rb.velocity.y);
+            //rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
+            rb.transform.localScale = new Vector2(playerMovingWidth, rb.transform.localScale.y);
+        }
+        else
+        {
+            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+        }
 
         if (Input.GetAxis("Horizontal") < 0)
         {
             //set the velocity of the rigid body
             //rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-			rb.velocity = new Vector2(-moveSpeed - dashBoost, rb.velocity.y);
-			rb.transform.localScale = new Vector2 (playerMovingWidth, rb.transform.localScale.y);
+            rb.velocity = new Vector2(-moveSpeed - dashBoost, rb.velocity.y);
+            rb.transform.localScale = new Vector2(playerMovingWidth, rb.transform.localScale.y);
 
         } /*else {
 			rb.transform.localScale = new Vector2 (1.0f, rb.transform.localScale.y); 
@@ -115,25 +118,27 @@ public class playercontrol : MonoBehaviour {
         if (Input.GetAxis("Vertical") > 0)
         {
             //set the velocity of the rigid body
-			rb.velocity = new Vector2(rb.velocity.x, moveSpeed + dashBoost);
-			//rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
-		} else {
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerHeight); 
-		}
+            rb.velocity = new Vector2(rb.velocity.x, moveSpeed + dashBoost);
+            //rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerMovingHeight);
+        }
+        else
+        {
+            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerHeight);
+        }
 
         if (Input.GetAxis("Vertical") < 0)
         {
             //set the velocity of the rigid body
-			rb.velocity = new Vector2(rb.velocity.x, -moveSpeed - dashBoost);
-			//rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, playerMovingHeight); 
-		} /*else {
+            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed - dashBoost);
+            //rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerMovingHeight);
+        } /*else {
 			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 1.0f); 
 		}*/
 
-		//changes angle of the sprite depending on which directional keys are being pressed
-		/*if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
+        //changes angle of the sprite depending on which directional keys are being pressed
+        /*if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
 			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
@@ -160,65 +165,69 @@ public class playercontrol : MonoBehaviour {
 			maxDash = maxDash * 0.5f;
 			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
 			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		}*/  
+		}*/
 
-		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
-			maxDash = 50f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} 
-		else if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) 
-		{
-			maxDash = 50f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		}  
+        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") > 0)
+        {
+            maxDash = 50f;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
+            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+        }
+        else if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") > 0)
+        {
+            maxDash = 50f;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
+            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+        }
 
-		else if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) {
-			maxDash = 50f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} 
+        else if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") < 0)
+        {
+            maxDash = 50f;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
+            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+        }
 
-		else if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) 
-		{
-			maxDash = 50f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} 
-		else 
-		{
-			maxDash = baseMaxDash;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);		
-		} 
+        else if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") < 0)
+        {
+            maxDash = 50f;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
+            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+        }
+        else
+        {
+            maxDash = baseMaxDash;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);
+        }
 
 
-		//DASH ATTEMPT
-		//float dashCounter = 0;
-		GameObject dashSound = GameObject.Find ("Dash Sound");
-		AudioSource dash = dashSound.GetComponent<AudioSource> ();
+        //DASH ATTEMPT
+        //float dashCounter = 0;
+        GameObject dashSound = GameObject.Find("Dash Sound");
+        AudioSource dash = dashSound.GetComponent<AudioSource>();
 
-		if (Input.GetKey (KeyCode.Space) && dashFuel > 10f) {
-			dashBoost += 1.0f;
-			dashFuel -= 100f * Time.deltaTime;
-			dash.Play ();
-			//source.Play ();
+        if (Input.GetKey(KeyCode.Space) && dashFuel > 10f)
+        {
+            dashBoost += 1.0f;
+            dashFuel -= 100f * Time.deltaTime;
+            dash.Play();
+            //source.Play ();
 
-		} else
-		{
-			dashBoost = minDash;
-			dashFuel += 10f;
+        }
+        else
+        {
+            dashBoost = minDash;
+            dashFuel += 10f;
 
-		}
+        }
 
-		dashFuel = Mathf.Clamp (dashFuel, 0f, 50f);
+        dashFuel = Mathf.Clamp(dashFuel, 0f, 50f);
 
-	
 
-		//Mathf.Clamp(dashBoost, 
 
-		//Original screen wrap
-		/*if (rb.transform.position.x > 3f) 
+        //Mathf.Clamp(dashBoost, 
+
+        //Original screen wrap
+        /*if (rb.transform.position.x > 3f) 
 		{
 			rb.transform.position = new Vector3 (-2.99f, rb.transform.position.y, rb.transform.position.z);
 		}
@@ -236,85 +245,106 @@ public class playercontrol : MonoBehaviour {
 			rb.transform.position = new Vector3 (rb.transform.position.x, 2.80f, rb.transform.position.z);
 		}*/
 
-		//Screen wrap 
-		if (rb.transform.position.x > rightConstraint) 
-		{
-			TrailWrap ();
-			rb.transform.position = new Vector3 (leftConstraint, rb.transform.position.y, rb.transform.position.z);
+        //Screen wrap 
+        if (rb.transform.position.x > rightConstraint)
+        {
+            TrailWrap();
+            rb.transform.position = new Vector3(leftConstraint, rb.transform.position.y, rb.transform.position.z);
 
-		}
-		else if (rb.transform.position.x < leftConstraint) 
-		{
-			TrailWrap ();
-			rb.transform.position = new Vector3 (rightConstraint, rb.transform.position.y, rb.transform.position.z);
+        }
+        else if (rb.transform.position.x < leftConstraint)
+        {
+            TrailWrap();
+            rb.transform.position = new Vector3(rightConstraint, rb.transform.position.y, rb.transform.position.z);
 
-		}
+        }
 
-		if (rb.transform.position.y > topConstraint)
-		{
-			TrailWrap ();
-			rb.transform.position = new Vector3 (rb.transform.position.x, bottomConstraint, rb.transform.position.z);
-		}
-		else if (rb.transform.position.y < bottomConstraint)
-		{
-			TrailWrap ();
-			rb.transform.position = new Vector3 (rb.transform.position.x, topConstraint, rb.transform.position.z);
-		}
+        if (rb.transform.position.y > topConstraint)
+        {
+            TrailWrap();
+            rb.transform.position = new Vector3(rb.transform.position.x, bottomConstraint, rb.transform.position.z);
+        }
+        else if (rb.transform.position.y < bottomConstraint)
+        {
+            TrailWrap();
+            rb.transform.position = new Vector3(rb.transform.position.x, topConstraint, rb.transform.position.z);
+        }
 
         //var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-		//Rigidbody2D rb = GetComponent<Rigidbody2D> ();
+        //Rigidbody2D rb = GetComponent<Rigidbody2D> ();
 
-		//transform.position += move * moveSpeed * Time.deltaTime;
+        //transform.position += move * moveSpeed * Time.deltaTime;
 
         //transform.Translate(Input.acceleration.x, 0, -Input.acceleration.z);
 
         scoreText.text = "Score: " + score.ToString();
-		UIscoreText.text = "Score: " + score.ToString ();
+        UIscoreText.text = "Score: " + score.ToString();
         comboText.text = "Streak: " + comboScore.ToString();
-        
 
 
-		Color currentcolor = GetComponent<SpriteRenderer>().color;
 
-		//CHANGES TRAIL COLOR TO MATCH PLAYER COLOR aka currentcolor
-		if (currentcolor == colorlist [0]) 
-		{
-			pinktr.enabled = false;
-			bluetr.enabled = false;
-			greentr.enabled = false;
-			orangetr.enabled = true;
-		}
+        Color currentcolor = GetComponent<SpriteRenderer>().color;
 
-		else if (currentcolor == colorlist [1]) {
-			pinktr.enabled = false;
-			bluetr.enabled = false;
-			greentr.enabled = true;
-			orangetr.enabled = false;
+        //CHANGES TRAIL COLOR TO MATCH PLAYER COLOR aka currentcolor
+        if (currentcolor == colorlist[0])
+        {
+            pinktr.enabled = false;
+            bluetr.enabled = false;
+            greentr.enabled = false;
+            orangetr.enabled = true;
+        }
 
-		} else if (currentcolor == colorlist [2]) {
-			pinktr.enabled = true;
-			bluetr.enabled = false;
-			greentr.enabled = false;
-			orangetr.enabled = false;
-		} else if (currentcolor == colorlist [3]) {
-			pinktr.enabled = false;
-			bluetr.enabled = true;
-			greentr.enabled = false;
-			orangetr.enabled = false;
-    	}
+        else if (currentcolor == colorlist[1])
+        {
+            pinktr.enabled = false;
+            bluetr.enabled = false;
+            greentr.enabled = true;
+            orangetr.enabled = false;
 
-        if(PlayerHealth <= 0)
-		{
+        }
+        else if (currentcolor == colorlist[2])
+        {
+            pinktr.enabled = true;
+            bluetr.enabled = false;
+            greentr.enabled = false;
+            orangetr.enabled = false;
+        }
+        else if (currentcolor == colorlist[3])
+        {
+            pinktr.enabled = false;
+            bluetr.enabled = true;
+            greentr.enabled = false;
+            orangetr.enabled = false;
+        }
+
+        if (PlayerHealth <= 0)
+        {
             Destroy(gameObject.GetComponent<SpriteRenderer>());
             Invoke("Restart", 2f);
-		}
+        }
 
-		healthText.text = "Health: " + PlayerHealth.ToString ("#");
+        healthText.text = "Health: " + PlayerHealth.ToString("#");
 
 
-       part.startColor = currentcolor;
-		
-		}
+        part.startColor = currentcolor;
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            int newCheck = 0;
+            int oldCheck = 0;
+
+            Debug.Log("ColorChange");
+
+            while (newCheck == oldCheck)
+            {
+                newCheck = Random.Range(0, 3);
+            }
+            
+            GetComponent<SpriteRenderer>().color = colorlist[newCheck];
+            oldCheck = newCheck;
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
