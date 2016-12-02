@@ -41,6 +41,14 @@ public class playercontrol : MonoBehaviour {
     public Text healthText;
     public ParticleSystem part;
 
+	GameObject pinkTrail;
+	GameObject blueTrail;
+	GameObject greenTrail;
+	GameObject orangeTrail;
+	TrailRenderer pinktr;
+	TrailRenderer bluetr;
+	TrailRenderer greentr;
+	TrailRenderer orangetr;
 
 
     // Use this for initialization
@@ -58,7 +66,14 @@ public class playercontrol : MonoBehaviour {
 		topConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, Screen.height) ).y;
 		bottomConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).y;
 
-		dashFuel = 50f;
+		pinkTrail = GameObject.Find ("PinkTrail");
+		blueTrail = GameObject.Find ("BlueTrail");
+		greenTrail = GameObject.Find ("GreenTrail");
+		orangeTrail = GameObject.Find ("OrangeTrail");
+		pinktr = pinkTrail.GetComponent<TrailRenderer> ();
+		bluetr = blueTrail.GetComponent<TrailRenderer> ();
+		greentr = greenTrail.GetComponent<TrailRenderer> ();
+		orangetr = orangeTrail.GetComponent<TrailRenderer> ();
 
         PartUnFlash();
     }
@@ -260,27 +275,28 @@ public class playercontrol : MonoBehaviour {
 		//CHANGES TRAIL COLOR TO MATCH PLAYER COLOR aka currentcolor
 		if (currentcolor == colorlist [0]) 
 		{
-			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = true;
+			pinktr.enabled = false;
+			bluetr.enabled = false;
+			greentr.enabled = false;
+			orangetr.enabled = true;
 		}
 
 		else if (currentcolor == colorlist [1]) {
-			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = true;
+			pinktr.enabled = false;
+			bluetr.enabled = false;
+			greentr.enabled = true;
+			orangetr.enabled = false;
+
 		} else if (currentcolor == colorlist [2]) {
-			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = true;
+			pinktr.enabled = true;
+			bluetr.enabled = false;
+			greentr.enabled = false;
+			orangetr.enabled = false;
 		} else if (currentcolor == colorlist [3]) {
-			transform.Find ("OrangeTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("GreenTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("PinkTrail").GetComponent<TrailRenderer> ().enabled = false;
-			transform.Find ("BlueTrail").GetComponent<TrailRenderer> ().enabled = true;
+			pinktr.enabled = false;
+			bluetr.enabled = true;
+			greentr.enabled = false;
+			orangetr.enabled = false;
     	}
 
         if(PlayerHealth <= 0)
@@ -410,18 +426,10 @@ public class playercontrol : MonoBehaviour {
         part.startSize = 0;
     }
 
+
 	//Sets trail time back to 1.
 	void TrailOn()
 	{
-		GameObject pinkTrail = GameObject.Find ("PinkTrail");
-		GameObject blueTrail = GameObject.Find ("BlueTrail");
-		GameObject greenTrail = GameObject.Find ("GreenTrail");
-		GameObject orangeTrail = GameObject.Find ("OrangeTrail");
-		TrailRenderer pinktr = pinkTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer bluetr = blueTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer greentr = greenTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer orangetr = orangeTrail.GetComponent<TrailRenderer> ();
-
 		pinktr.time = 1f;
 		bluetr.time = 1f;
 		greentr.time = 1f;
@@ -432,15 +440,6 @@ public class playercontrol : MonoBehaviour {
 	//Call this function every time you go past the screen constraints.
 	void TrailWrap()
 	{
-		GameObject pinkTrail = GameObject.Find ("PinkTrail");
-		GameObject blueTrail = GameObject.Find ("BlueTrail");
-		GameObject greenTrail = GameObject.Find ("GreenTrail");
-		GameObject orangeTrail = GameObject.Find ("OrangeTrail");
-		TrailRenderer pinktr = pinkTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer bluetr = blueTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer greentr = greenTrail.GetComponent<TrailRenderer> ();
-		TrailRenderer orangetr = orangeTrail.GetComponent<TrailRenderer> ();pinktr.time = 1f;
-
 		//Turn trails off by setting time to zero.
 		pinktr.time = 0f;	 
 		bluetr.time = 0f;
@@ -448,7 +447,7 @@ public class playercontrol : MonoBehaviour {
 		orangetr.time = 0f;
 
 		//Turn trails on again
-		Invoke ("TrailOn", 0.01f);	
+		Invoke ("TrailOn", 0.02f);	
 	}
 
 }
