@@ -11,11 +11,13 @@ public class playercontrol : MonoBehaviour {
 	public float minDash;
 	public float baseMaxDash;
 	public float dashBoost;
+    private float comboScore;
 	//private float baseMoveSpeed = 6.0f;
     public Color[] colorlist;
-    public int score;
+    private int score;
     public TextMesh scoreText;
 	public Text UIscoreText;
+    public Text comboText;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -268,6 +270,8 @@ public class playercontrol : MonoBehaviour {
 
         scoreText.text = "Score: " + score.ToString();
 		UIscoreText.text = "Score: " + score.ToString ();
+        comboText.text = "Streak: " + comboScore.ToString();
+        
 
 
 		Color currentcolor = GetComponent<SpriteRenderer>().color;
@@ -338,6 +342,7 @@ public class playercontrol : MonoBehaviour {
 			success.SendMessage ("RightColorSound"); //plays successful sound when in contact with correct color
 			Debug.Log("orange on orange");
             score++;
+            comboScore++;
             Debug.Log("score: " + score);
             while (check == 0)
             {
@@ -354,7 +359,8 @@ public class playercontrol : MonoBehaviour {
 				success.SendMessage ("RightColorSound");
 	            Debug.Log("green on green");
 	            score++;
-	            Debug.Log("score: " + score);
+                comboScore++;
+                Debug.Log("score: " + score);
 
             while (check == 1)
             {
@@ -373,7 +379,8 @@ public class playercontrol : MonoBehaviour {
 				success.SendMessage ("RightColorSound");
 				//Debug.Log("orange on orange");
 	            score++;
-	            Debug.Log("score: " + score);
+                comboScore++;
+                Debug.Log("score: " + score);
             while (check == 2)
             {
                 check = Random.Range(0, 3);
@@ -389,8 +396,9 @@ public class playercontrol : MonoBehaviour {
 				GameObject success = GameObject.Find ("SuccessSound");
 				success.SendMessage ("RightColorSound");
 	            Debug.Log("blue on blue");
-	            score++;
-	            Debug.Log("score: " + score);
+                score++;
+                comboScore++;
+                Debug.Log("score: " + score);
             while (check == 3)
             {
                 check = Random.Range(0, 3);
@@ -404,6 +412,7 @@ public class playercontrol : MonoBehaviour {
                 PlayerHealth-=10;
 	            Debug.Log("score: " + score);
 				source.Play();
+                comboScore=0;
 	            col.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 ///GetComponent<SpriteRenderer>().color = Color.red;
         	}
