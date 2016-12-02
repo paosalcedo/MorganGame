@@ -49,7 +49,7 @@ public class playercontrol : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
+	
         source = GetComponent<AudioSource>();
 		Debug.Log (Screen.width);
 
@@ -178,16 +178,20 @@ public class playercontrol : MonoBehaviour {
 
 		//DASH ATTEMPT
 		//float dashCounter = 0;
+		GameObject dashSound = GameObject.Find ("Dash Sound");
+		AudioSource dash = dashSound.GetComponent<AudioSource> ();
 
-		if (/*Input.GetKey ("left shift") ||*/ Input.GetKey (KeyCode.Space) && dashFuel > 10f) {
+		if (Input.GetKey (KeyCode.Space) && dashFuel > 10f) {
 			dashBoost += 1.0f;
 			dashFuel -= 100f * Time.deltaTime;
-			//dashCounter += Time.deltaTime;
+			dash.Play ();
+			//source.Play ();
+
 		} else
 		{
 			dashBoost = minDash;
 			dashFuel += 10f;
-			//dashCounter = 0f;
+
 		}
 
 		dashFuel = Mathf.Clamp (dashFuel, 0f, 50f);
