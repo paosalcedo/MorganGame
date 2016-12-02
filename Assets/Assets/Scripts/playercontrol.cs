@@ -442,7 +442,7 @@ public class playercontrol : MonoBehaviour {
 		TrailRenderer orangetr = orangeTrail.GetComponent<TrailRenderer> ();pinktr.time = 1f;
 
 		//Turn trails off by setting time to zero.
-		pinktr.time = 0f;	
+		pinktr.time = 0f;	 
 		bluetr.time = 0f;
 		greentr.time = 0f;
 		orangetr.time = 0f;
