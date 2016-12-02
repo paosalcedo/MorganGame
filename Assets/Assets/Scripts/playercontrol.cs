@@ -48,8 +48,8 @@ public class playercontrol : MonoBehaviour {
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-	
+		sr = GetComponent<SpriteRenderer>();		
+
         source = GetComponent<AudioSource>();
 		Debug.Log (Screen.width);
 
@@ -200,7 +200,7 @@ public class playercontrol : MonoBehaviour {
 
 		//Mathf.Clamp(dashBoost, 
 
-		//resetting player position when going past borders
+		//Original screen wrap
 		/*if (rb.transform.position.x > 3f) 
 		{
 			rb.transform.position = new Vector3 (-2.99f, rb.transform.position.y, rb.transform.position.z);
@@ -219,22 +219,28 @@ public class playercontrol : MonoBehaviour {
 			rb.transform.position = new Vector3 (rb.transform.position.x, 2.80f, rb.transform.position.z);
 		}*/
 
-		//New system for any screen size
+		//Screen wrap 
 		if (rb.transform.position.x > rightConstraint) 
 		{
+			TrailWrap ();
 			rb.transform.position = new Vector3 (leftConstraint, rb.transform.position.y, rb.transform.position.z);
+
 		}
 		else if (rb.transform.position.x < leftConstraint) 
 		{
+			TrailWrap ();
 			rb.transform.position = new Vector3 (rightConstraint, rb.transform.position.y, rb.transform.position.z);
+
 		}
 
 		if (rb.transform.position.y > topConstraint)
 		{
+			TrailWrap ();
 			rb.transform.position = new Vector3 (rb.transform.position.x, bottomConstraint, rb.transform.position.z);
 		}
 		else if (rb.transform.position.y < bottomConstraint)
 		{
+			TrailWrap ();
 			rb.transform.position = new Vector3 (rb.transform.position.x, topConstraint, rb.transform.position.z);
 		}
 
@@ -403,4 +409,46 @@ public class playercontrol : MonoBehaviour {
     {
         part.startSize = 0;
     }
+
+	//Sets trail time back to 1.
+	void TrailOn()
+	{
+		GameObject pinkTrail = GameObject.Find ("PinkTrail");
+		GameObject blueTrail = GameObject.Find ("BlueTrail");
+		GameObject greenTrail = GameObject.Find ("GreenTrail");
+		GameObject orangeTrail = GameObject.Find ("OrangeTrail");
+		TrailRenderer pinktr = pinkTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer bluetr = blueTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer greentr = greenTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer orangetr = orangeTrail.GetComponent<TrailRenderer> ();
+
+		pinktr.time = 1f;
+		bluetr.time = 1f;
+		greentr.time = 1f;
+		orangetr.time = 1f;
+	}
+
+
+	//Call this function every time you go past the screen constraints.
+	void TrailWrap()
+	{
+		GameObject pinkTrail = GameObject.Find ("PinkTrail");
+		GameObject blueTrail = GameObject.Find ("BlueTrail");
+		GameObject greenTrail = GameObject.Find ("GreenTrail");
+		GameObject orangeTrail = GameObject.Find ("OrangeTrail");
+		TrailRenderer pinktr = pinkTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer bluetr = blueTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer greentr = greenTrail.GetComponent<TrailRenderer> ();
+		TrailRenderer orangetr = orangeTrail.GetComponent<TrailRenderer> ();pinktr.time = 1f;
+
+		//Turn trails off by setting time to zero.
+		pinktr.time = 0f;	
+		bluetr.time = 0f;
+		greentr.time = 0f;
+		orangetr.time = 0f;
+
+		//Turn trails on again
+		Invoke ("TrailOn", 0.01f);	
+	}
+
 }
