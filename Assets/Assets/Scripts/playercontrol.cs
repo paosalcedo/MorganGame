@@ -18,6 +18,7 @@ public class playercontrol : MonoBehaviour {
     public TextMesh scoreText;
 	public Text UIscoreText;
     public Text comboText;
+	public bool noKeysPressed;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -83,7 +84,7 @@ public class playercontrol : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+		//score can't go below 0
         if (score < 0)
         {
             score = 0;
@@ -92,113 +93,113 @@ public class playercontrol : MonoBehaviour {
         // var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         // transform.position += move * moveSpeed * Time.deltaTime;
 
-        if (Input.GetAxis("Horizontal") > 0)
+		//PLAYER MOVEMENT SECTION
+		noKeysPressed = true;
+
+		if (noKeysPressed == true)
+		{
+			maxDash = baseMaxDash; 
+			rb.transform.localScale = new Vector2(playerWidth, playerHeight);
+			//rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);
+		}
+
+        if (Input.GetAxis("Horizontal") > 0) //RIGHT
         {
+			noKeysPressed = false;
             //set the velocity of the rigid body
             rb.velocity = new Vector2(moveSpeed + dashBoost, rb.velocity.y);
             //rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
-            rb.transform.localScale = new Vector2(playerMovingWidth, rb.transform.localScale.y);
-        }
-        else
-        {
-            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
-        }
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -90f);
+		} /*else
+		{
+			maxDash = baseMaxDash; 
+			//rb.transform.localScale = new Vector2(playerWidth, playerHeight);
+			//rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);
+		}*/
 
-        if (Input.GetAxis("Horizontal") < 0)
+      
+        if (Input.GetAxis("Horizontal") < 0) //LEFT
         {
+			noKeysPressed = false;
             //set the velocity of the rigid body
             //rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
             rb.velocity = new Vector2(-moveSpeed - dashBoost, rb.velocity.y);
-            rb.transform.localScale = new Vector2(playerMovingWidth, rb.transform.localScale.y);
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 90f); 
+			//rb.transform.rotation = new Vector3 (rb.transform.rotation.x, rb.transform.rotation.y, -90f);
+			//rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+		} 
 
-        } /*else {
-			rb.transform.localScale = new Vector2 (1.0f, rb.transform.localScale.y); 
-		}*/
-
-        if (Input.GetAxis("Vertical") > 0)
+			
+        if (Input.GetAxis("Vertical") > 0) //UP
         {
+			noKeysPressed = false;
             //set the velocity of the rigid body
+			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f); 
             rb.velocity = new Vector2(rb.velocity.x, moveSpeed + dashBoost);
             //rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
-            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerMovingHeight);
-        }
-        else
-        {
-            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerHeight);
-        }
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+		} 
 
-        if (Input.GetAxis("Vertical") < 0)
+
+        if (Input.GetAxis("Vertical") < 0) //DOWN
         {
+			noKeysPressed = false;
             //set the velocity of the rigid body
             rb.velocity = new Vector2(rb.velocity.x, -moveSpeed - dashBoost);
             //rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
-            rb.transform.localScale = new Vector2(rb.transform.localScale.x, playerMovingHeight);
-        } /*else {
-			rb.transform.localScale = new Vector2 (rb.transform.localScale.x, 1.0f); 
-		}*/
+			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 180f); 
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+		} 
 
+			
         //changes angle of the sprite depending on which directional keys are being pressed
-        /*if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) {
-			maxDash = maxDash * 0.5f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} else {
-			maxDash = baseMaxDash;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);		
-		} 
 
-		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) {
-			maxDash = maxDash * 0.5f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} else {
-			maxDash = baseMaxDash;
-		}  
-
-		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) {
-			maxDash = maxDash * 0.5f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		} 
-
-		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) {
-			maxDash = maxDash * 0.5f;
-			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
-			rb.transform.localScale = new Vector2 (playerWidth, rb.transform.localScale.y); 
-		}*/
-
-        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") > 0) //Moving UP + RIGHT
         {
+			noKeysPressed = false;
             maxDash = 50f;
             rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
-            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
         }
-        else if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") > 0)
-        {
-            maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
-            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
-        }
+        
 
-        else if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") < 0)
+
+		if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") > 0) //DOWN + RIGHT
         {
+			noKeysPressed = false;
             maxDash = 50f;
             rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
-            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
         }
 
-        else if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") < 0)
-        {
+	
+
+		if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") < 0) //UP + LEFT
+		{
+			noKeysPressed = false;
             maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 135f);
-            rb.transform.localScale = new Vector2(playerWidth, rb.transform.localScale.y);
-        }
-        else
-        {
-            maxDash = baseMaxDash;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
         }
 
+
+
+        if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") < 0) //DOWN + LEFT
+        {
+			noKeysPressed = false;
+			maxDash = 50f;
+            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -225f);
+			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+        }		
+			
+
+
+		//maxDash = baseMaxDash;
+
+
+		//rb.transform.localScale = new Vector2(playerWidth, playerHeight);
 
         //DASH ATTEMPT
         //float dashCounter = 0;
