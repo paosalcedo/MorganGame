@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
 
+	int newCheck;
+	int oldCheck;
 	public float dashFuel;
     public float moveSpeed;
 	public float maxDash;
@@ -77,6 +79,9 @@ public class playercontrol : MonoBehaviour {
 		bluetr = blueTrail.GetComponent<TrailRenderer> ();
 		greentr = greenTrail.GetComponent<TrailRenderer> ();
 		orangetr = orangeTrail.GetComponent<TrailRenderer> ();
+
+		newCheck = 0;
+		oldCheck = 0;
 
         PartUnFlash();
     }
@@ -329,7 +334,8 @@ public class playercontrol : MonoBehaviour {
 
         part.startColor = currentcolor;
 
-        if (Input.GetButtonDown("Fire1"))
+		//COLOR CHANGER
+        /*if (Input.GetButtonDown("Fire1"))
         {
 
             int newCheck = 0;
@@ -344,7 +350,20 @@ public class playercontrol : MonoBehaviour {
             
             GetComponent<SpriteRenderer>().color = colorlist[newCheck];
             oldCheck = newCheck;
-        }
+        }*/
+
+		if (Input.GetButtonDown("Fire1"))
+		{
+			while (newCheck == oldCheck) 
+			{
+				newCheck = Random.Range (0, 4);
+			}
+
+			GetComponent<SpriteRenderer>().color = colorlist[newCheck];
+			oldCheck = newCheck;
+			Debug.Log ("Color is now " + newCheck);
+		}
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -377,7 +396,7 @@ public class playercontrol : MonoBehaviour {
             Debug.Log("score: " + score);
             while (check == 0)
             {
-                check = Random.Range(0, 3);
+                check = Random.Range(0, 4);
             }
                 GetComponent<SpriteRenderer>().color = colorlist[check];
            
@@ -395,7 +414,7 @@ public class playercontrol : MonoBehaviour {
 
             while (check == 1)
             {
-                check = Random.Range(0, 3);
+                check = Random.Range(0, 4);
             }
                 GetComponent<SpriteRenderer>().color = colorlist[check];
             
@@ -414,7 +433,7 @@ public class playercontrol : MonoBehaviour {
                 Debug.Log("score: " + score);
             while (check == 2)
             {
-                check = Random.Range(0, 3);
+                check = Random.Range(0, 4);
             }
             GetComponent<SpriteRenderer>().color = colorlist[check];
             
@@ -422,7 +441,7 @@ public class playercontrol : MonoBehaviour {
 
 	        //blue orb
 
-		else if (currentcolor == colorlist[3] && col.gameObject.tag == "Yellow" /*col.gameObject.name.Contains("blueplatform")*/)  //if orb is blue and hits blue platform 
+		else if (currentcolor == colorlist[3] && col.gameObject.tag == "Blue" /*col.gameObject.name.Contains("blueplatform")*/)  //if orb is blue and hits blue platform 
 	        {
 				GameObject success = GameObject.Find ("SuccessSound");
 				success.SendMessage ("RightColorSound");

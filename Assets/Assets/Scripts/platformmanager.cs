@@ -63,7 +63,7 @@ public class platformmanager : MonoBehaviour
                  rightspawnPosition.y,
                  rightspawnPosition.z);
 
-                pinkplatform.GetComponent<SpriteRenderer>().flipX = true;
+                //pinkplatform.GetComponent<SpriteRenderer>().flipX = true;
                 //transform.Rotate(new Vector3(0, 180, 0));
 
                 pinkplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
@@ -92,7 +92,7 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.y,
                 rightspawnPosition.z);
 
-                blueplatform.GetComponent<SpriteRenderer>().flipX = true;
+               // blueplatform.GetComponent<SpriteRenderer>().flipX = true;
 
                 blueplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
@@ -121,7 +121,7 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.y,
                 rightspawnPosition.z);
 
-                orangeplatform.GetComponent<SpriteRenderer>().flipX = true;
+                //orangeplatform.GetComponent<SpriteRenderer>().flipX = true;
 
                 orangeplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
@@ -148,7 +148,7 @@ public class platformmanager : MonoBehaviour
                 rightspawnPosition.y,
                 rightspawnPosition.z);
 
-               greenplatform.GetComponent<SpriteRenderer>().flipX = true;
+               //greenplatform.GetComponent<SpriteRenderer>().flipX = true;
 
                greenplatform.GetComponent<Rigidbody2D>().gravityScale += speedGain;
             }
