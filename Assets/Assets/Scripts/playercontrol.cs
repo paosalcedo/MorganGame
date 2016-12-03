@@ -21,12 +21,14 @@ public class playercontrol : MonoBehaviour {
     public TextMesh scoreText;
 	public Text UIscoreText;
     public Text comboText;
+    public Text colorChangeText;
 	public bool noKeysPressed;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
     private int check;
+    private float colorChangeIncrementer; //int that gives a color change every three streak
 
     public GameObject gb;
 
@@ -287,6 +289,7 @@ public class playercontrol : MonoBehaviour {
         scoreText.text = "Score: " + score.ToString();
         UIscoreText.text = "Score: " + score.ToString();
         comboText.text = "Streak: " + comboScore.ToString();
+        colorChangeText.text = "Changes: " + colorChangeCounter.ToString();
 
 
 
@@ -338,7 +341,7 @@ public class playercontrol : MonoBehaviour {
 		//COLOR CHANGER
 
 
-		if (Input.GetButtonDown("Fire1") && colorChangeCounter > 1)
+		if (Input.GetButtonDown("Fire1") && colorChangeCounter > 0 )
 		{
 			while (newCheck == oldCheck) 
 			{
@@ -348,11 +351,27 @@ public class playercontrol : MonoBehaviour {
 			GetComponent<SpriteRenderer>().color = colorlist[newCheck];
 			oldCheck = newCheck;
 			Debug.Log ("Color is now " + newCheck);
-		}
+            colorChangeCounter--;
+            colorChangeIncrementer = 0;
+        }
 
-		if (comboScore > 1 && colorChangeCounter < 2) {
-			colorChangeCounter++;
-		}
+       
+        if(colorChangeIncrementer > 3)
+        {
+            colorChangeIncrementer = 0;
+            Debug.Log(colorChangeIncrementer);
+        }
+
+        if (colorChangeCounter < 1 && colorChangeIncrementer > 2)
+        {
+            colorChangeCounter += 1;
+            
+        }
+
+        /*if(colorChangeCounter ==0 && comboScore >2)
+        {
+            colorChangeCounter++;
+        }*/
 
     }
 
@@ -383,6 +402,7 @@ public class playercontrol : MonoBehaviour {
 			Debug.Log("orange on orange");
             score++;
             comboScore++;
+            colorChangeIncrementer++;
             Debug.Log("score: " + score);
             while (check == 0)
             {
@@ -400,6 +420,7 @@ public class playercontrol : MonoBehaviour {
 	            Debug.Log("green on green");
 	            score++;
                 comboScore++;
+                colorChangeIncrementer++;
                 Debug.Log("score: " + score);
 
             while (check == 1)
@@ -420,6 +441,7 @@ public class playercontrol : MonoBehaviour {
 				//Debug.Log("orange on orange");
 	            score++;
                 comboScore++;
+                colorChangeIncrementer++;
                 Debug.Log("score: " + score);
             while (check == 2)
             {
@@ -438,6 +460,7 @@ public class playercontrol : MonoBehaviour {
 	            Debug.Log("blue on blue");
                 score++;
                 comboScore++;
+                colorChangeIncrementer++;
                 Debug.Log("score: " + score);
             while (check == 3)
             {
@@ -453,7 +476,8 @@ public class playercontrol : MonoBehaviour {
 	            Debug.Log("score: " + score);
 				source.Play();
                 comboScore=0;
-	            col.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                colorChangeIncrementer=0;
+                col.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 ///GetComponent<SpriteRenderer>().color = Color.red;
         	}
 			
