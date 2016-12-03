@@ -7,6 +7,7 @@ public class playercontrol : MonoBehaviour {
 
 	int newCheck;
 	int oldCheck;
+	private int colorChangeCounter;
 	public float dashFuel;
     public float moveSpeed;
 	public float maxDash;
@@ -335,33 +336,22 @@ public class playercontrol : MonoBehaviour {
         part.startColor = currentcolor;
 
 		//COLOR CHANGER
-        /*if (Input.GetButtonDown("Fire1"))
-        {
 
-            int newCheck = 0;
-            int oldCheck = 0;
 
-            Debug.Log("ColorChange");
-
-            while (newCheck == oldCheck)
-            {
-                newCheck = Random.Range(0, 3);
-            }
-            
-            GetComponent<SpriteRenderer>().color = colorlist[newCheck];
-            oldCheck = newCheck;
-        }*/
-
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonDown("Fire1") && colorChangeCounter > 1)
 		{
 			while (newCheck == oldCheck) 
 			{
-				newCheck = Random.Range (0, 4);
+				newCheck = Random.Range (0, 4);//wtf?
 			}
 
 			GetComponent<SpriteRenderer>().color = colorlist[newCheck];
 			oldCheck = newCheck;
 			Debug.Log ("Color is now " + newCheck);
+		}
+
+		if (comboScore > 1 && colorChangeCounter < 2) {
+			colorChangeCounter++;
 		}
 
     }
