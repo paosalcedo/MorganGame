@@ -27,6 +27,7 @@ public class playercontrol : MonoBehaviour {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
+
     private int check;
     private float colorChangeIncrementer; //int that gives a color change every three streak
 
@@ -48,6 +49,8 @@ public class playercontrol : MonoBehaviour {
     public float PlayerHealth = 100;
     public Text healthText;
     public ParticleSystem part;
+
+    private float scoreTimer;
 
 	GameObject pinkTrail;
 	GameObject blueTrail;
@@ -87,6 +90,8 @@ public class playercontrol : MonoBehaviour {
 		oldCheck = 0;
 
         PartUnFlash();
+
+        scoreTimer = 10f;
     }
 
     // Update is called once per frame
@@ -355,8 +360,14 @@ public class playercontrol : MonoBehaviour {
             colorChangeIncrementer = 0;
         }
 
-       
-        if(colorChangeIncrementer > 3)
+        scoreTimer -= Time.deltaTime;
+        if (scoreTimer <= 0f)
+        {
+            colorChangeCounter += 1;
+            scoreTimer += 10f;
+        }
+
+        if (colorChangeIncrementer > 3)
         {
             colorChangeIncrementer = 0;
             Debug.Log(colorChangeIncrementer);
