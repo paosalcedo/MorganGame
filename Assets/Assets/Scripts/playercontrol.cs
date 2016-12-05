@@ -22,6 +22,7 @@ public class playercontrol : MonoBehaviour {
 	public Text UIscoreText;
     public Text comboText;
     public Text colorChangeText;
+    public Text timerText;
 	public bool noKeysPressed;
 
     private Rigidbody2D rb;
@@ -295,6 +296,7 @@ public class playercontrol : MonoBehaviour {
         UIscoreText.text = "Score: " + score.ToString();
         comboText.text = "Streak: " + comboScore.ToString();
         colorChangeText.text = "Changes: " + colorChangeCounter.ToString();
+        timerText.text = scoreTimer.ToString("F1") + " seconds";
 
 
 
@@ -358,6 +360,9 @@ public class playercontrol : MonoBehaviour {
 			Debug.Log ("Color is now " + newCheck);
             colorChangeCounter--;
             colorChangeIncrementer = 0;
+
+            PartFlash();
+            Invoke("PartUnFlash", 0.5f);
         }
 
         scoreTimer -= Time.deltaTime;
