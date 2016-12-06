@@ -20,6 +20,7 @@ public class playercontrol : MonoBehaviour {
     public Color[] colorlist;
     private int score;
     public TextMesh scoreText;
+	public Text finalScoreText;
 	public Text UIscoreText;
     public Text comboText;
     public Text colorChangeText;
@@ -346,9 +347,11 @@ public class playercontrol : MonoBehaviour {
 
         if (PlayerHealth <= 0) //kills the player when health reaches zero
         {
-            Destroy(gameObject.GetComponent<SpriteRenderer>());
+			finalScoreText.text = ("You correctly punched\n" + score + "\nmeteors!");
+			Destroy(gameObject.GetComponent<SpriteRenderer>());
 			gameOver.SendMessage ("GameOverMessageOn");
-			Invoke("Restart", 2f);
+
+			Invoke("Restart", 5f);
         }
 
         healthText.text = "Health: " + PlayerHealth.ToString("#");
