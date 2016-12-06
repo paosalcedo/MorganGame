@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
 
+	GameObject gameOver; 
 	int newCheck;
 	int oldCheck;
 	private int colorChangeCounter;
@@ -27,7 +28,6 @@ public class playercontrol : MonoBehaviour {
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-
 
     private int check;
     private float colorChangeIncrementer; //int that gives a color change every three streak
@@ -67,6 +67,9 @@ public class playercontrol : MonoBehaviour {
 
 
     void Start () {
+
+		gameOver = GameObject.Find ("gameOverTitle");
+		gameOver.SendMessage ("GameOverMessageOff");
         rb = GetComponent<Rigidbody2D>();
 		sr = GetComponent<SpriteRenderer>();		
 
@@ -334,10 +337,11 @@ public class playercontrol : MonoBehaviour {
             orangetr.enabled = false;
         }
 
-        if (PlayerHealth <= 0)
+        if (PlayerHealth <= 0) //kills the player when health reaches zero
         {
             Destroy(gameObject.GetComponent<SpriteRenderer>());
-            Invoke("Restart", 2f);
+			gameOver.SendMessage ("GameOverMessageOn");
+			Invoke("Restart", 2f);
         }
 
         healthText.text = "Health: " + PlayerHealth.ToString("#");
@@ -348,7 +352,7 @@ public class playercontrol : MonoBehaviour {
 		//COLOR CHANGER
 
 
-		if (Input.GetButtonDown("Fire1") && colorChangeCounter > 0 )
+		if (Input.GetKeyDown(KeyCode.Return) && colorChangeCounter > 0 || Input.GetButtonDown("Fire1") && colorChangeCounter > 0 )
 		{
 			while (newCheck == oldCheck) 
 			{
@@ -388,6 +392,13 @@ public class playercontrol : MonoBehaviour {
         {
             colorChangeCounter++;
         }*/
+
+		//Restart game anytime
+		if (Input.GetKeyDown (KeyCode.M)) 
+		{
+			SceneManager.LoadScene ("startScreen", LoadSceneMode.Single);
+		}
+
 
     }
 
