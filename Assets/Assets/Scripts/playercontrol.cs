@@ -240,16 +240,30 @@ public class playercontrol : MonoBehaviour {
             dash.Play();
 			rb.transform.localScale = new Vector2(playerWidth*0.5f, playerMovingHeight*1.5f);
 			collider.enabled = false;
-            //source.Play ();
+
+			Color transparentColor;
+			transparentColor = gameObject.GetComponent<SpriteRenderer>().color;
+			transparentColor.a = 0.5f;
+			gameObject.GetComponent<SpriteRenderer>().color = transparentColor;
 
         }
+
+		else if (Input.GetKeyUp(KeyCode.Space))
+		{
+			Color transparentColor;
+			transparentColor = gameObject.GetComponent<SpriteRenderer>().color;
+			transparentColor.a = 1;
+			gameObject.GetComponent<SpriteRenderer>().color = transparentColor;
+		}
         else
         {
 			collider.enabled = true;
             dashBoost = minDash;
             dashFuel += 10f;
-
         }
+
+
+
 
         dashFuel = Mathf.Clamp(dashFuel, 0f, 50f);
 
