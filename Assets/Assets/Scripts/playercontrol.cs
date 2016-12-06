@@ -26,6 +26,9 @@ public class playercontrol : MonoBehaviour {
     public Text timerText;
 	public bool noKeysPressed;
 
+    public Image img;
+    Color currentcolor;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -52,6 +55,8 @@ public class playercontrol : MonoBehaviour {
     public ParticleSystem part;
 
     private float scoreTimer;
+
+    Color alphaFlash;
 
 	GameObject pinkTrail;
 	GameObject blueTrail;
@@ -96,6 +101,8 @@ public class playercontrol : MonoBehaviour {
         PartUnFlash();
 
         scoreTimer = 10f;
+
+        
     }
 
     // Update is called once per frame
@@ -348,6 +355,10 @@ public class playercontrol : MonoBehaviour {
 
 
         part.startColor = currentcolor;
+        
+        alphaFlash = currentcolor;
+        alphaFlash.a = 0;
+       
 
 		//COLOR CHANGER
 
@@ -367,6 +378,10 @@ public class playercontrol : MonoBehaviour {
 
             PartFlash();
             Invoke("PartUnFlash", 0.5f);
+
+            screenFlash();
+            Invoke("screenUnFlash", 0.1f);
+
         }
 
         scoreTimer -= Time.deltaTime;
@@ -405,7 +420,7 @@ public class playercontrol : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("collision");
-        Color currentcolor = GetComponent<SpriteRenderer>().color;
+        currentcolor = GetComponent<SpriteRenderer>().color;
         Debug.Log("now: " + currentcolor);
 
         Destroy(col.gameObject.GetComponent<CircleCollider2D>()); //can't collide with object twice
@@ -420,9 +435,15 @@ public class playercontrol : MonoBehaviour {
         PartFlash();
         Invoke("PartUnFlash", 0.5f);
 
-       
 
-		if (currentcolor == colorlist[0] && col.gameObject.tag == "Magenta"/*col.gameObject.name.Contains("orangeplatform")*/) //if orb is pink and hits pink platform
+        img.color = currentcolor;
+        screenFlash();
+        Invoke("screenUnFlash", 0.1f);
+
+
+
+
+        if (currentcolor == colorlist[0] && col.gameObject.tag == "Magenta"/*col.gameObject.name.Contains("orangeplatform")*/) //if orb is pink and hits pink platform
         {
 			GameObject success = GameObject.Find ("SuccessSound"); 
 			success.SendMessage ("RightColorSound"); //plays successful sound when in contact with correct color
@@ -526,9 +547,28 @@ public class playercontrol : MonoBehaviour {
         part.startSize = 0;
     }
 
+    void screenFlash()
+    {
+        Color flashColor = img.color;
+        flashColor.a = 0.5f;
+        img.color = flashColor;
+    }
 
-	//Sets trail time back to 1.
-	void TrailOn()
+    void screenUnFlash()
+    {
+        Color flashColor = img.color;
+        //flashColor.a = 0;
+
+        flashColor.a = Mathf.Lerp(0, 0.5f, 0.01f);
+        img.color = flashColor;
+    }
+
+
+
+
+
+    //Sets trail time back to 1.
+    void TrailOn()
 	{
 		pinktr.time = 1f;
 		bluetr.time = 1f;
