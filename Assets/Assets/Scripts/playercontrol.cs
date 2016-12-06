@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class playercontrol : MonoBehaviour {
 
+	CircleCollider2D collider; 
 	GameObject gameOver; 
 	int newCheck;
 	int oldCheck;
@@ -74,8 +75,9 @@ public class playercontrol : MonoBehaviour {
 
     void Start () {
 
+		collider = GetComponent<CircleCollider2D> ();
 		gameOver = GameObject.Find ("gameOverTitle");
-		gameOver.SendMessage ("GameOverMessageOff");
+		//gameOver.SendMessage ("GameOverMessageOff");
         rb = GetComponent<Rigidbody2D>();
 		sr = GetComponent<SpriteRenderer>();		
 
@@ -236,11 +238,14 @@ public class playercontrol : MonoBehaviour {
             dashBoost += 1.0f;
             dashFuel -= 100f * Time.deltaTime;
             dash.Play();
+			rb.transform.localScale = new Vector2(playerWidth*0.5f, playerMovingHeight*1.5f);
+			collider.enabled = false;
             //source.Play ();
 
         }
         else
         {
+			collider.enabled = true;
             dashBoost = minDash;
             dashFuel += 10f;
 
