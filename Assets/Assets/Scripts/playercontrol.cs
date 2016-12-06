@@ -233,18 +233,24 @@ public class playercontrol : MonoBehaviour {
         GameObject dashSound = GameObject.Find("Dash Sound");
         AudioSource dash = dashSound.GetComponent<AudioSource>();
 
-        if (Input.GetKey(KeyCode.Space) && dashFuel > 10f)
+        if (Input.GetKey(KeyCode.Space) && dashFuel > 10f && noKeysPressed == false)
         {
             dashBoost += 1.0f;
             dashFuel -= 100f * Time.deltaTime;
             dash.Play();
-			rb.transform.localScale = new Vector2(playerWidth*0.5f, playerMovingHeight*1.5f);
-			collider.enabled = false;
+            rb.transform.localScale = new Vector2(playerWidth * 0.5f, playerMovingHeight * 1.5f);
+            // if (gameObject.GetComponent<Rigidbody2D>().velocity.x != 0 && gameObject.GetComponent<Rigidbody2D>().velocity.y != 0 )
+            //{
+            //  rb.transform.localScale = new Vector2(playerWidth * 0.5f, playerMovingHeight * 1.5f);
+            //}
+            collider.enabled = false;
 
 			Color transparentColor;
 			transparentColor = gameObject.GetComponent<SpriteRenderer>().color;
 			transparentColor.a = 0.5f;
 			gameObject.GetComponent<SpriteRenderer>().color = transparentColor;
+
+           
 
         }
 
@@ -254,6 +260,7 @@ public class playercontrol : MonoBehaviour {
 			transparentColor = gameObject.GetComponent<SpriteRenderer>().color;
 			transparentColor.a = 1;
 			gameObject.GetComponent<SpriteRenderer>().color = transparentColor;
+            
 		}
         else
         {
