@@ -114,35 +114,32 @@ public class playercontrol : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update ()
+	{
 		//score can't go below 0
-        if (score < 0)
-        {
-            score = 0;
-        }
+		if (score < 0) {
+			score = 0;
+		}
 
-        // var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        // transform.position += move * moveSpeed * Time.deltaTime;
+		// var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+		// transform.position += move * moveSpeed * Time.deltaTime;
 
 		//PLAYER MOVEMENT SECTION
 		noKeysPressed = true;
 
-		if (noKeysPressed == true)
-		{
+		if (noKeysPressed == true) {
 			maxDash = baseMaxDash; 
-			rb.transform.localScale = new Vector2(playerWidth, playerHeight);
+			rb.transform.localScale = new Vector2 (playerWidth, playerHeight);
 			//rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f);
 		}
 
-        if (Input.GetAxis("Horizontal") > 0) //RIGHT
-        {
+		if (Input.GetAxis ("Horizontal") > 0) { //RIGHT
 			noKeysPressed = false;
-            //set the velocity of the rigid body
-            rb.velocity = new Vector2(moveSpeed + dashBoost, rb.velocity.y);
-            //rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -90f);
+			//set the velocity of the rigid body
+			rb.velocity = new Vector2 (moveSpeed + dashBoost, rb.velocity.y);
+			//rb.velocity = new Vector2 (moveSpeed, rb.velocity.y);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -90f);
 		} /*else
 		{
 			maxDash = baseMaxDash; 
@@ -151,80 +148,73 @@ public class playercontrol : MonoBehaviour {
 		}*/
 
       
-        if (Input.GetAxis("Horizontal") < 0) //LEFT
-        {
+		if (Input.GetAxis ("Horizontal") < 0) { //LEFT
 			noKeysPressed = false;
-            //set the velocity of the rigid body
-            //rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-            rb.velocity = new Vector2(-moveSpeed - dashBoost, rb.velocity.y);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 90f); 
+			//set the velocity of the rigid body
+			//rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+			rb.velocity = new Vector2 (-moveSpeed - dashBoost, rb.velocity.y);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 90f); 
 			//rb.transform.rotation = new Vector3 (rb.transform.rotation.x, rb.transform.rotation.y, -90f);
 			//rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
 		} 
 
 			
-        if (Input.GetAxis("Vertical") > 0) //UP
-        {
+		if (Input.GetAxis ("Vertical") > 0) { //UP
 			noKeysPressed = false;
-            //set the velocity of the rigid body
-			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 0f); 
-            rb.velocity = new Vector2(rb.velocity.x, moveSpeed + dashBoost);
-            //rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+			//set the velocity of the rigid body
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 0f); 
+			rb.velocity = new Vector2 (rb.velocity.x, moveSpeed + dashBoost);
+			//rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
 		} 
 
 
-        if (Input.GetAxis("Vertical") < 0) //DOWN
-        {
+		if (Input.GetAxis ("Vertical") < 0) { //DOWN
 			noKeysPressed = false;
-            //set the velocity of the rigid body
-            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed - dashBoost);
-            //rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
-			rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 180f); 
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
+			//set the velocity of the rigid body
+			rb.velocity = new Vector2 (rb.velocity.x, -moveSpeed - dashBoost);
+			//rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 180f); 
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
 		} 
 
 			
-        //changes angle of the sprite depending on which directional keys are being pressed
+		//changes angle of the sprite depending on which directional keys are being pressed
 
-        if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") > 0) //Moving UP + RIGHT
-        {
+		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") > 0) { //Moving UP + RIGHT
 			noKeysPressed = false;
-            maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-        }
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -45f);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+		}
         
 
 
-		if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") > 0) //DOWN + RIGHT
-        {
+		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") > 0) { //DOWN + RIGHT
 			noKeysPressed = false;
-            maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-        }
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -135f);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+		}
 
 	
 
-		if (Input.GetAxis("Vertical") > 0 && Input.GetAxis("Horizontal") < 0) //UP + LEFT
-		{
-			noKeysPressed = false;
-            maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-        }
-
-
-
-        if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Horizontal") < 0) //DOWN + LEFT
-        {
+		if (Input.GetAxis ("Vertical") > 0 && Input.GetAxis ("Horizontal") < 0) { //UP + LEFT
 			noKeysPressed = false;
 			maxDash = 50f;
-            rb.transform.localEulerAngles = new Vector3(rb.transform.localRotation.x, rb.transform.localRotation.y, -225f);
-			rb.transform.localScale = new Vector2(playerWidth, playerMovingHeight);
-        }		
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, 45f);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+		}
+
+
+
+		if (Input.GetAxis ("Vertical") < 0 && Input.GetAxis ("Horizontal") < 0) { //DOWN + LEFT
+			noKeysPressed = false;
+			maxDash = 50f;
+			rb.transform.localEulerAngles = new Vector3 (rb.transform.localRotation.x, rb.transform.localRotation.y, -225f);
+			rb.transform.localScale = new Vector2 (playerWidth, playerMovingHeight);
+		}		
 			
 
 
@@ -233,16 +223,17 @@ public class playercontrol : MonoBehaviour {
 
 		//rb.transform.localScale = new Vector2(playerWidth, playerHeight);
 
-        //DASH ATTEMPT
-        //float dashCounter = 0;
-        GameObject dashSound = GameObject.Find("Dash Sound");
-        AudioSource dash = dashSound.GetComponent<AudioSource>();
+		//DASH ATTEMPT
+		//float dashCounter = 0;
+		GameObject dashSound = GameObject.Find ("Dash Sound");
+		AudioSource dash = dashSound.GetComponent<AudioSource> ();
 
-        if (Input.GetKey(KeyCode.Space) && dashFuel > 10f && noKeysPressed == false)
-        {
-            dashBoost += 1.0f;
-            dashFuel -= 100f * Time.deltaTime;
-            dash.Play();
+		if (Input.GetKey (KeyCode.Space) && dashFuel > 10f && noKeysPressed == false) {
+			dashBoost += 1.0f;
+			dashFuel -= 100f * Time.deltaTime;
+			if (!dash.isPlaying) {
+				dash.Play ();
+			}
             rb.transform.localScale = new Vector2(playerWidth * 0.5f, playerMovingHeight * 1.5f);
             // if (gameObject.GetComponent<Rigidbody2D>().velocity.x != 0 && gameObject.GetComponent<Rigidbody2D>().velocity.y != 0 )
             //{
@@ -415,6 +406,9 @@ public class playercontrol : MonoBehaviour {
 
             screenFlash();
             Invoke("screenUnFlash", 0.1f);
+			GameObject colorChangeSoundHolder = GameObject.Find ("ColorChangeSound");
+			AudioSource colorChangeSound = colorChangeSoundHolder.GetComponent<AudioSource> ();
+			colorChangeSound.Play();
 
         }
 

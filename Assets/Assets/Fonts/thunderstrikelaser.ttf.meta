@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9ff97b4e6b5afa94781cb3d3ff5c030b
+timeCreated: 1489443161
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Thunderstrike Laser
+  fontNames:
+  - Thunderstrike Laser
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ece820aeea6e8354d84874bf2f5e55fe
+timeCreated: 1489443161
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Thunderstrike 3D
+  fontNames:
+  - Thunderstrike 3D
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

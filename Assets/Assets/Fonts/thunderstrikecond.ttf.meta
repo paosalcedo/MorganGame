@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fc83359de8984dd4b876fd6775de26dd
+timeCreated: 1489443161
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Thunderstrike Condensed
+  fontNames:
+  - Thunderstrike Condensed
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
