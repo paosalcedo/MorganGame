@@ -83,12 +83,17 @@ public class playercontrol : MonoBehaviour {
 
         source = GetComponent<AudioSource>();
 		Debug.Log (Screen.width);
+//
+//		leftConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).x;
+//		rightConstraint = Camera.main.ScreenToWorldPoint( new Vector2(Screen.width, 0.0f) ).x;
+//		topConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, Screen.height) ).y;
+//		bottomConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).y;
 
-		leftConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).x;
-		rightConstraint = Camera.main.ScreenToWorldPoint( new Vector2(Screen.width, 0.0f) ).x;
-		topConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, Screen.height) ).y;
-		bottomConstraint = Camera.main.ScreenToWorldPoint( new Vector2(0.0f, 0.0f) ).y;
-
+		leftConstraint = -4f;
+		rightConstraint = 4f;
+		topConstraint = 2.55f;
+		bottomConstraint = -7.45f;
+		
 		pinkTrail = GameObject.Find ("PinkTrail");
 		blueTrail = GameObject.Find ("BlueTrail");
 		greenTrail = GameObject.Find ("GreenTrail");
